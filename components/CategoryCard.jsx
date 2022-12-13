@@ -1,22 +1,22 @@
 import { StyleSheet, SafeAreaView,View,Text,ScrollView, TouchableOpacity} from 'react-native';
 import { cores } from '../style/globalStyle';
-import { Entypo,FontAwesome,Ionicons } from '@expo/vector-icons';
+import { Entypo,FontAwesome } from '@expo/vector-icons';
 
 
 
-const CityCard = ({cityName,onPress}) => {
+const CategoryCard = ({categoryName,onPress}) => {
     
 
   return (
     <TouchableOpacity onPress={onPress} style={styles.container}>
-        <Ionicons name="location" size={24} color={cores.azul} />
-       <Text style={styles.cityNameText}>{cityName}</Text>
+       
+       <Text style={styles.cityNameText}>{categoryName}</Text>
        <Entypo name="chevron-small-right" size={30} color={cores.azul} />
     </TouchableOpacity>
   )
 }
 
-export default CityCard
+export default CategoryCard
 
 const styles = StyleSheet.create({
     container: {

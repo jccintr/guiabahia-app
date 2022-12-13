@@ -8,24 +8,29 @@ import CityCard from '../components/CityCard';
 const Home = () => {
     const navigation = useNavigation();
 
+
+
+const onCityPress = () => {
+    navigation.navigate('Categorias');
+}
+
+
+
+
   return (
     <View style={styles.container}>
          <Header title="Guia Bahia" subTitle="Extremo Sul"/>
          <Text style={styles.sloganText}>A sua busca completa em um único lugar !</Text>
          <View style={styles.body}>
                 <Text style={{width:'100%',textAlign: 'left',marginBottom: 10,fontSize:16,color:cores.azul}}>Escolha uma cidade:</Text>
-                
-                   <CityCard cityName='Brasópolis'/>
-               
-                
-                <CityCard cityName='Itajubá'/>
-                <CityCard cityName='Paraisópolis'/>
-                <CityCard cityName='Pouso Alegre'/>
-                <CityCard cityName='Taubaté'/>
-                <CityCard cityName='São José dos Campos'/>
+                <CityCard cityName='Brasópolis' onPress={()=>onCityPress()}/>
+                <CityCard cityName='Itajubá' onPress={()=>onCityPress()}/>
+                <CityCard cityName='Paraisópolis' onPress={()=>onCityPress()}/>
+                <CityCard cityName='Pouso Alegre' onPress={()=>onCityPress()}/>
+                <CityCard cityName='Taubaté' onPress={()=>onCityPress()}/>
+                <CityCard cityName='São José dos Campos' onPress={()=>onCityPress()}/>
          </View>
-        
-    </View>
+     </View>
   
   )
 }
