@@ -1,17 +1,32 @@
 import React, { useState, useEffect } from 'react'
-import { StyleSheet, SafeAreaView,View,Text,ScrollView,TouchableOpacity} from 'react-native';
+import { StyleSheet,View,Text,ScrollView} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import Header from '../components/Header';
 import { cores } from '../style/globalStyle';
 import CityCard from '../components/CityCard';
+import { database } from '../firebaseConfig';
+import { collection,onSnapshot, orderBy, query} from 'firebase/firestore';
 
 const Home = () => {
     const navigation = useNavigation();
+    const [cidades,setCidades] = useState([]);
 
 
+    useEffect(()=>{
+      const collectionRef = collection(database,'Cidades');
+      const q = query(collectionRef, orderBy('nome','asc'));
+      const unsuscribe = onSnapshot(q,querySnapshot => {
+         setCidades(querySnapshot.docs.map(doc => ( {id: doc.id, nome: doc.data().nome} )))
+      })
+    //  setIsLoading(false);
+      return unsuscribe;
+  
+  }, []);    
 
-const onCityPress = () => {
-    navigation.navigate('Categorias');
+
+const onCityPress = (cidade) => {
+    navigation.navigate('Distritos',{cidade: cidade});
+   
 }
 
 
@@ -23,12 +38,11 @@ const onCityPress = () => {
          <Text style={styles.sloganText}>A sua busca completa em um único lugar !</Text>
          <View style={styles.body}>
                 <Text style={{width:'100%',textAlign: 'left',marginBottom: 10,fontSize:16,color:cores.azul}}>Escolha uma cidade:</Text>
-                <CityCard cityName='Brasópolis' onPress={()=>onCityPress()}/>
-                <CityCard cityName='Itajubá' onPress={()=>onCityPress()}/>
-                <CityCard cityName='Paraisópolis' onPress={()=>onCityPress()}/>
-                <CityCard cityName='Pouso Alegre' onPress={()=>onCityPress()}/>
-                <CityCard cityName='Taubaté' onPress={()=>onCityPress()}/>
-                <CityCard cityName='São José dos Campos' onPress={()=>onCityPress()}/>
+                <ScrollView style={{width:'100%'}} showsVerticalScrollIndicator={false}>
+                {cidades.map(cidade => <CityCard key={cidade.id} cidade={cidade } onPress={()=>onCityPress(cidade)}/>)}
+                </ScrollView>
+                
+               
          </View>
      </View>
   

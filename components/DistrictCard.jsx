@@ -1,22 +1,22 @@
 import { StyleSheet,Text, TouchableOpacity} from 'react-native';
 import { cores } from '../style/globalStyle';
-import { Entypo,FontAwesome,Ionicons } from '@expo/vector-icons';
+import { Entypo } from '@expo/vector-icons';
 
 
 
-const CityCard = ({cidade,onPress}) => {
+const DistrictCard = ({distrito,onPress}) => {
     
 
   return (
     <TouchableOpacity onPress={onPress} style={styles.container}>
-        <Ionicons name="location" size={24} color={cores.azul} />
-       <Text style={styles.cityNameText}>{cidade.nome}</Text>
+       
+       <Text style={styles.cityNameText}>{distrito.nome}</Text>
        <Entypo name="chevron-small-right" size={30} color={cores.azul} />
     </TouchableOpacity>
   )
 }
 
-export default CityCard
+export default DistrictCard
 
 const styles = StyleSheet.create({
     container: {

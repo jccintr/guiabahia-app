@@ -1,6 +1,6 @@
-import { StyleSheet, SafeAreaView,View,Text,ScrollView, TouchableOpacity} from 'react-native';
+import { StyleSheet,Text, TouchableOpacity} from 'react-native';
 import { cores } from '../style/globalStyle';
-import { Entypo,FontAwesome } from '@expo/vector-icons';
+import { Entypo } from '@expo/vector-icons';
 
 
 
