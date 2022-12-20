@@ -16,15 +16,15 @@ const ClientTabBar = ({state,navigation}) => {
               <Entypo style={{color:state.index === 0 ? cores.branco:cores.menuItem}} name="home" size={24}  />
               <Text style={state.index === 0 ? styles.TabItemTextSelected:styles.TabItemText}>Inicio</Text>
             </TouchableOpacity>
-
+{/*
             <TouchableOpacity style={styles.TabItem} onPress={()=>goTo('Search')}>
               <FontAwesome style={{color:state.index === 1 ? cores.branco:cores.menuItem}} name="search" size={24}  />
               <Text style={state.index === 1 ? styles.TabItemTextSelected:styles.TabItemText}>Busca</Text>
             </TouchableOpacity>
-
+  */}
             <TouchableOpacity style={styles.TabItem} onPress={()=>goTo('About')}>
-              <AntDesign style={{color:state.index === 2 ? cores.branco:cores.menuItem}} name="infocirlceo" size={24}  />
-              <Text style={state.index === 2 ? styles.TabItemTextSelected:styles.TabItemText}>Sobre</Text>
+              <AntDesign style={{color:state.index === 1 ? cores.branco:cores.menuItem}} name="infocirlceo" size={24}  />
+              <Text style={state.index === 1 ? styles.TabItemTextSelected:styles.TabItemText}>Sobre</Text>
             </TouchableOpacity>
     </View>
   )

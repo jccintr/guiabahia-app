@@ -6,6 +6,7 @@ import { cores } from '../style/globalStyle';
 import CityCard from '../components/CityCard';
 import { database } from '../firebaseConfig';
 import { collection,onSnapshot, orderBy, query} from 'firebase/firestore';
+import { StatusBar } from 'expo-status-bar';
 
 const Home = () => {
     const navigation = useNavigation();
@@ -34,6 +35,7 @@ const onCityPress = (cidade) => {
 
   return (
     <View style={styles.container}>
+         <StatusBar/>
          <Header title="Guia Bahia" subTitle="Extremo Sul"/>
          <Text style={styles.sloganText}>A sua busca completa em um único lugar !</Text>
          <View style={styles.body}>

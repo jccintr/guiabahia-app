@@ -1,17 +1,34 @@
 import React, { useState, useEffect } from 'react'
-import { StyleSheet, SafeAreaView,View,Text,TouchableOpacity} from 'react-native';
+import { StyleSheet, SafeAreaView,Image,ActivityIndicator} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import logo from '../assets/logo-300.png';
+import { StatusBar } from 'expo-status-bar';
+import { cores } from '../style/globalStyle';
 
 const Preload = () => {
     const navigation = useNavigation();
-  return (
-    <View style={styles.container}>
-        <Text>Preload Screen</Text>
-        <TouchableOpacity onPress={()=> navigation.reset({routes:[{name:'MainTab'}]})}>
-            <Text>Entrar</Text>
-        </TouchableOpacity>
-    </View>
-  )
+
+
+    useEffect(()=>{
+      
+      setTimeout(() => { 
+
+        navigation.reset({
+          routes:[{name:'MainTab'}] 
+        }); 
+
+      }, 1500);
+       
+    }, []);
+
+
+    return (
+      <SafeAreaView style={styles.container}>
+        <StatusBar/>
+          <Image source={logo} style={styles.imagelogo}/>
+          <ActivityIndicator size="large" color={cores.azul}/>
+      </SafeAreaView>
+     )
 }
 
 export default Preload
@@ -32,6 +49,11 @@ const styles = StyleSheet.create({
     sectionTitle:{
       fontWeight:'bold',
       fontSize: 26,
-    }
+    },
+    imagelogo:{
+      height: 300,
+      width: 300,
+      borderRadius:150,
+  },
   
   }); 

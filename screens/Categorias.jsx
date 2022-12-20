@@ -1,11 +1,12 @@
 import React, {useState,useEffect} from 'react'
-import { StyleSheet,View,Text,ScrollView} from 'react-native';
+import { StyleSheet,View,Text,ScrollView,TouchableOpacity} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import Header from '../components/Header';
 import { cores } from '../style/globalStyle';
 import CategoryCard from '../components/CategoryCard';
 import { database } from '../firebaseConfig';
 import { collection,onSnapshot, orderBy, query} from 'firebase/firestore';
+import { AntDesign } from '@expo/vector-icons';
 
 const Categorias = ({route}) => {
    const navigation = useNavigation();
@@ -14,7 +15,7 @@ const Categorias = ({route}) => {
 
    useEffect(()=>{
     const collectionRef = collection(database,'Categorias');
-    const q = query(collectionRef, orderBy('nome','asc'));
+    const q = query(collectionRef,orderBy('ordem','asc'));
     const unsuscribe = onSnapshot(q,querySnapshot => {
        setCategorias(querySnapshot.docs.map(doc => ( {id: doc.id, nome: doc.data().nome} )))
     })
@@ -32,7 +33,9 @@ const Categorias = ({route}) => {
   return (
      <View style={styles.container}>
           <Header title={cidade.nome} subTitle={distrito.nome}/>
-        
+          <TouchableOpacity style={styles.backButton} onPress={()=>navigation.goBack()}>
+              <AntDesign name="arrowleft" size={24} color="#fff" />
+          </TouchableOpacity>
          <View style={styles.body}>
                 <Text style={{width:'100%',textAlign: 'left',marginBottom: 10,fontSize:16,color:cores.azul}}>Escolha uma categoria:</Text>
                 <ScrollView style={{width:'100%'}} showsVerticalScrollIndicator={false}>
@@ -72,6 +75,13 @@ const styles = StyleSheet.create({
         fontWeight:'bold',
         fontSize: 18,
         color: cores.azul,
+    },
+    backButton:{
+      position: 'absolute',
+      width: 50,
+      height: 50,
+      top: 50,
+      left: 15,
     }
   
   }); 
