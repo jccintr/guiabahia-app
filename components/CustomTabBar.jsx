@@ -13,7 +13,7 @@ const ClientTabBar = ({state,navigation}) => {
     <View style={styles.TabArea}>
 
             <TouchableOpacity style={styles.TabItem} onPress={()=>goTo('Home')}>
-              <Entypo style={{color:state.index === 0 ? cores.branco:cores.menuItem}} name="home" size={24}  />
+              <Entypo style={{color:state.index === 0 ? cores.branco:cores.marcador}} name="home" size={24}  />
               <Text style={state.index === 0 ? styles.TabItemTextSelected:styles.TabItemText}>Inicio</Text>
             </TouchableOpacity>
 {/*
@@ -23,7 +23,7 @@ const ClientTabBar = ({state,navigation}) => {
             </TouchableOpacity>
   */}
             <TouchableOpacity style={styles.TabItem} onPress={()=>goTo('About')}>
-              <AntDesign style={{color:state.index === 1 ? cores.branco:cores.menuItem}} name="infocirlceo" size={24}  />
+              <AntDesign style={{color:state.index === 1 ? cores.branco:cores.marcador}} name="infocirlceo" size={24}  />
               <Text style={state.index === 1 ? styles.TabItemTextSelected:styles.TabItemText}>Sobre</Text>
             </TouchableOpacity>
     </View>
@@ -37,11 +37,11 @@ const styles = StyleSheet.create({
     
     TabArea:{
         height: 60,
-        backgroundColor: cores.azul,
+        backgroundColor: cores.background,
         flexDirection: 'row',
         justifyContent: 'space-around',
         borderTopWidth: 1,
-        borderTopColor: cores.menuItem,
+        borderTopColor: cores.marcador,
 
     },
     TabItem:{
@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
     },
     TabItemText:{
       marginTop: 5,
-      color: cores.menuItem
+      color: cores.marcador
     },
     TabItemTextSelected:{
       marginTop: 5,

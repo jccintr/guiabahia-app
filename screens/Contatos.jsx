@@ -1,5 +1,5 @@
 import React, {useState,useEffect} from 'react'
-import { StyleSheet, SafeAreaView,View,Text,ScrollView,Linking,TouchableOpacity} from 'react-native';
+import { StyleSheet, SafeAreaView,View,Text,ScrollView,Linking,TouchableOpacity,StatusBar} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import Header from '../components/Header';
 import { cores } from '../style/globalStyle';
@@ -7,6 +7,7 @@ import ContatoCard from '../components/ContatoCard';
 import { database } from '../firebaseConfig';
 import { collection,onSnapshot, orderBy, query,where } from 'firebase/firestore';
 import { AntDesign } from '@expo/vector-icons';
+//import { StatusBar } from 'expo-status-bar';
 
 const Contatos = ({route}) => {
      const [contatos,setContatos] = useState([]);
@@ -29,12 +30,16 @@ const Contatos = ({route}) => {
   }, []);
 
 onContatoPress = (telefone) => {
- 
-   Linking.openURL(`whatsapp://send?phone=55${telefone}&text=${mensagem}`);
+  Linking.openURL(`whatsapp://send?phone=55${telefone}&text=${mensagem}`);
 }
 
   return (
     <View style={styles.container}>
+       <StatusBar
+            animated={true}
+            backgroundColor={cores.background}
+            barStyle="light-content"
+          />
     <Header title={distrito.nome} subTitle={categoria.nome}/>
     <TouchableOpacity style={styles.backButton} onPress={()=>navigation.goBack()}>
        <AntDesign name="arrowleft" size={24} color="#fff" />
@@ -42,7 +47,9 @@ onContatoPress = (telefone) => {
    <View style={styles.body}>
           {contatos.length>0?<Text style={{width:'100%',textAlign: 'left',marginBottom: 10,fontSize:16,color:cores.azul}}>Selecione uma opção:</Text>:''}
           {contatos.length===0 ? <Text style={styles.noRecordText}>Nenhum registro encontrado.</Text>:''}
-          {contatos.map(contato => <ContatoCard key={contato.id} contactName={contato.nome} onPress={()=>onContatoPress(contato.telefone)}/>)}
+          <ScrollView style={{width:'100%'}} showsVerticalScrollIndicator={false}>
+            {contatos.map(contato => <ContatoCard key={contato.id} contactName={contato.nome} onPress={()=>onContatoPress(contato.telefone)}/>)}
+          </ScrollView>
         
    </View>
 </View>
@@ -55,7 +62,7 @@ export default Contatos
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: '#fff',
+      backgroundColor: cores.background,
       alignItems: 'center',
       justifyContent: 'flex-start',
      },
@@ -92,7 +99,7 @@ const styles = StyleSheet.create({
       fontSize: 14,
       width:'100%',
       textAlign: 'center',
-      color: cores.azul,
+      color: cores.verde,
       fontWeight: 'bold',
       
     },

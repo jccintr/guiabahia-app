@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import { StyleSheet, SafeAreaView,Image,ActivityIndicator} from 'react-native';
+import { StyleSheet, SafeAreaView,Image,ActivityIndicator,ImageBackground,Dimensions} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import logo from '../assets/logo-300.png';
+import splash from '../assets/splash.png'
 import { StatusBar } from 'expo-status-bar';
 import { cores } from '../style/globalStyle';
 
@@ -25,8 +26,9 @@ const Preload = () => {
     return (
       <SafeAreaView style={styles.container}>
         <StatusBar/>
-          <Image source={logo} style={styles.imagelogo}/>
-          <ActivityIndicator size="large" color={cores.azul}/>
+        <Image source={splash}   style={styles.splash}/>
+       
+        <ActivityIndicator style={styles.loading} size="large" color={cores.branco}/>
       </SafeAreaView>
      )
 }
@@ -37,23 +39,19 @@ export default Preload
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: '#fff',
       alignItems: 'center',
       justifyContent: 'center',
-     },
-    body:{
-      flex:1,
-      alignItems:'center',
-      justifyContent: 'flex-start',
-    },
-    sectionTitle:{
-      fontWeight:'bold',
-      fontSize: 26,
-    },
-    imagelogo:{
-      height: 300,
-      width: 300,
-      borderRadius:150,
-  },
-  
+       },
+   splash:{
+   
+    width: '100%',
+    height: '100%',
+   
+   },
+   loading: {
+    position: 'absolute',
+    bottom: 10,
+    left: '50%',
+   }
+   
   }); 

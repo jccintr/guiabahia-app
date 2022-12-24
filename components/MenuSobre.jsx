@@ -13,25 +13,25 @@ const Icone = ({iconName,iconProvider}) => {
   
     switch (iconProvider) {
         case 'Ionicons':
-            return <Ionicons name={iconName} size={22} color={cores.azul} />;
+            return <Ionicons name={iconName} size={22} color={cores.branco} />;
             break;
         case 'Feather':
-            return <Feather name={iconName} size={22} color={cores.azul} />;
+            return <Feather name={iconName} size={22} color={cores.branco} />;
             break;
         case 'AntDesign':
-            return <AntDesign name={iconName} size={22} color={cores.azul} />;
+            return <AntDesign name={iconName} size={22} color={cores.branco} />;
             break;
         case 'FontAwesome':
-            return <FontAwesome name={iconName} size={22} ccolor={cores.azul} />;
+            return <FontAwesome name={iconName} size={22} ccolor={cores.branco} />;
              break;
         case 'MaterialIcons':
-            return <MaterialIcons name={iconName} size={22} color={cores.azul}  />;
+            return <MaterialIcons name={iconName} size={22} color={cores.branco}  />;
              break;
         case 'Entypo':
-            return <Entypo name={iconName} size={22} color={cores.azul}  />;
+            return <Entypo name={iconName} size={22} color={cores.branco}  />;
             break;
        case 'Octicons':
-             return <Octicons name={iconName} size={22} color={cores.azul} />;
+             return <Octicons name={iconName} size={22} color={cores.branco} />;
              break;
 
         default:
@@ -50,7 +50,7 @@ const MenuSobre = ({iconProvider,iconName,label,onPress}) => {
     <TouchableOpacity style={styles.menuArea} onPress={onPress}>
       <Icone iconName={iconName} iconProvider={iconProvider}/>
       <Text style={styles.labelText}>{label}</Text>
-      <Entypo name="chevron-small-right" size={24} color={cores.azul} />
+      <Entypo name="chevron-small-right" size={24} color={cores.branco} />
     </TouchableOpacity>
   )
 }
@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
    labelText:{
       fontSize: 16,
       fontWeight: 'bold',
-      color: cores.azul
+      color: cores.branco
    }
 
 

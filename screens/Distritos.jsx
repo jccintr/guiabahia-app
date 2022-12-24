@@ -1,5 +1,5 @@
 import React, { useEffect,useState } from 'react';
-import { StyleSheet, SafeAreaView,View,Text,ScrollView,TouchableOpacity} from 'react-native';
+import { StyleSheet, SafeAreaView,View,Text,ScrollView,TouchableOpacity,StatusBar} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import Header from '../components/Header';
 import { cores } from '../style/globalStyle';
@@ -7,6 +7,7 @@ import { database } from '../firebaseConfig';
 import { collection,onSnapshot, orderBy, query,where } from 'firebase/firestore';
 import DistrictCard from '../components/DistrictCard';
 import { AntDesign } from '@expo/vector-icons';
+//import { StatusBar } from 'expo-status-bar';
 
 const Distritos = ({route}) => {
    const navigation = useNavigation();
@@ -33,12 +34,17 @@ const onDistritoPress = (distrito,cidade) => {
 
   return (
      <View style={styles.container}>
+          <StatusBar
+            animated={true}
+            backgroundColor={cores.background}
+            barStyle="light-content"
+          />
          <Header title={cidade.nome} subTitle='Distritos'/>
          <TouchableOpacity style={styles.backButton} onPress={()=>navigation.goBack()}>
             <AntDesign name="arrowleft" size={24} color="#fff" />
          </TouchableOpacity>
          <View style={styles.body}>
-                <Text style={{width:'100%',textAlign: 'left',marginBottom: 10,fontSize:16,color:cores.azul}}>Escolha uma localidade:</Text>
+                <Text style={{width:'100%',textAlign: 'left',marginBottom: 10,fontSize:16,color:cores.verde}}>Escolha uma localidade:</Text>
                 <ScrollView style={{width:'100%'}} showsVerticalScrollIndicator={false}>
                 {distritos.map(distrito => <DistrictCard key={distrito.id} distrito={distrito} onPress={()=>onDistritoPress(distrito,cidade)}/>)}
                 </ScrollView>
@@ -54,7 +60,7 @@ export default Distritos
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: '#fff',
+      backgroundColor: cores.background,
       alignItems: 'center',
       justifyContent: 'flex-start',
      },

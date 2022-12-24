@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import { StyleSheet,View,Text,ScrollView} from 'react-native';
+import { StyleSheet,View,Text,ScrollView,StatusBar} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import Header from '../components/Header';
 import { cores } from '../style/globalStyle';
 import CityCard from '../components/CityCard';
 import { database } from '../firebaseConfig';
 import { collection,onSnapshot, orderBy, query} from 'firebase/firestore';
-import { StatusBar } from 'expo-status-bar';
+//import { StatusBar } from 'expo-status-bar';
 
 const Home = () => {
     const navigation = useNavigation();
@@ -35,11 +35,15 @@ const onCityPress = (cidade) => {
 
   return (
     <View style={styles.container}>
-         <StatusBar/>
+          <StatusBar
+            animated={true}
+            backgroundColor={cores.background}
+            barStyle="light-content"
+          />
          <Header title="Guia Bahia" subTitle="Extremo Sul"/>
          <Text style={styles.sloganText}>A sua busca completa em um único lugar !</Text>
          <View style={styles.body}>
-                <Text style={{width:'100%',textAlign: 'left',marginBottom: 10,fontSize:16,color:cores.azul}}>Escolha uma cidade:</Text>
+                <Text style={{width:'100%',textAlign: 'left',marginBottom: 10,fontSize:14,color:cores.verde}}>Escolha uma cidade:</Text>
                 <ScrollView style={{width:'100%'}} showsVerticalScrollIndicator={false}>
                 {cidades.map(cidade => <CityCard key={cidade.id} cidade={cidade } onPress={()=>onCityPress(cidade)}/>)}
                 </ScrollView>
@@ -57,7 +61,7 @@ export default Home
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: '#fff',
+      backgroundColor: cores.background,
       alignItems: 'center',
       justifyContent: 'flex-start',
      },
@@ -76,8 +80,8 @@ const styles = StyleSheet.create({
     sloganText: {
         marginTop: 10,
         fontWeight:'bold',
-        fontSize: 18,
-        color: cores.azul,
+        fontSize: 16,
+        color: cores.verde,
     }
   
   }); 

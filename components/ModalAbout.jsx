@@ -11,7 +11,7 @@ const ModalAbout = ({modalVisible,setModalVisible}) => {
             <View style={styles.header}>
                 <Text style={styles.titleText}>Sobre o Guia Bahia</Text>
                 <TouchableOpacity onPress={()=>setModalVisible(false)}>
-                <AntDesign name="close" size={26} color={cores.azul} />
+                <AntDesign name="close" size={26} color={cores.branco} />
                 </TouchableOpacity>
             </View>
             <View style={styles.body}>
@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
     container:{
         width: '100%',
         height: '100%',
-        backgroundColor: '#fff',
+        backgroundColor: cores.background,
         justifyContent:'flex-start',
         alignItems: 'center',
         paddingHorizontal: 5,
@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
     },
     titleText:{
        fontSize: 20,
-       color: cores.azul,
+       color: cores.branco,
        fontWeight: 'bold',
     },
     body:{
@@ -67,6 +67,7 @@ const styles = StyleSheet.create({
       fontSize: 16,
       width: '100%',
       textAlign: 'justify',
+      color: cores.branco,
     }
  
   }); 

@@ -20,9 +20,10 @@ const styles = StyleSheet.create({
       paddingTop: 30,
       width: '100%',
       height: 100,
-      backgroundColor: cores.azul,
+      backgroundColor: cores.background,
       alignItems: 'center',
       justifyContent: 'center',
+     
      },
     title:{
       fontWeight:'bold',

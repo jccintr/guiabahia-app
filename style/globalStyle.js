@@ -7,4 +7,7 @@ export const cores = {
     laranja:'#FF6600',
     cinzaClaro: '#fafafa',
     branco: '#fff',
+    background: '#020a15',
+    marcador: '#545454',
+    verde: '#53b254',
  };

@@ -11,7 +11,7 @@ const DistrictCard = ({distrito,onPress}) => {
     <TouchableOpacity onPress={onPress} style={styles.container}>
        
        <Text style={styles.cityNameText}>{distrito.nome}</Text>
-       <Entypo name="chevron-small-right" size={30} color={cores.azul} />
+       <Entypo name="chevron-small-right" size={30} color={cores.branco} />
     </TouchableOpacity>
   )
 }
@@ -25,19 +25,19 @@ const styles = StyleSheet.create({
         height: 50,
         marginBottom: 10,
         paddingHorizontal: 10,
-        backgroundColor: cores.cinzaClaro,
+        backgroundColor: cores.verde,
         elevation: 3,
-        borderRadius: 5,
+        borderRadius: 20,
         borderWidth: 1,
-        borderColor: cores.azul, 
+        borderColor: cores.marcador, 
         flexDirection: 'row',
        alignItems: 'center',
        justifyContent: 'space-between',
      },
       cityNameText:{
-      fontWeight:'bold',
+        
       fontSize: 18,
-      color: cores.azul,
+      color: cores.branco,
     },
     subTitle:{
         fontWeight:'bold',

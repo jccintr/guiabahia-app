@@ -2,8 +2,9 @@ import React, { useState } from 'react'
 import { StyleSheet, SafeAreaView,View,Linking,Image} from 'react-native';
 import Header from '../components/Header';
 import MenuSobre from '../components/MenuSobre';
-import logo from '../assets/guia-bahia-splash.png';
+import logo from '../assets/icon.png';
 import ModalAbout from '../components/ModalAbout';
+import { cores } from '../style/globalStyle';
 
 const About = () => {
 const [modalVisible,setModalVisible] = useState(false);
@@ -46,7 +47,7 @@ export default About
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: cores.background,
     alignItems: 'center',
     justifyContent: 'flex-start',
    },
