@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react'
-import { StyleSheet, SafeAreaView,Image,ActivityIndicator,ImageBackground,Dimensions} from 'react-native';
+import React, { useEffect } from 'react'
+import { StyleSheet, SafeAreaView,Image,ActivityIndicator,StatusBar} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import logo from '../assets/logo-300.png';
 import splash from '../assets/splash.png'
-import { StatusBar } from 'expo-status-bar';
+
 import { cores } from '../style/globalStyle';
 
 const Preload = () => {
@@ -25,7 +25,11 @@ const Preload = () => {
 
     return (
       <SafeAreaView style={styles.container}>
-        <StatusBar/>
+        <StatusBar
+            animated={true}
+            backgroundColor={cores.background}
+            barStyle="light-content"
+          />
         <Image source={splash}   style={styles.splash}/>
        
         <ActivityIndicator style={styles.loading} size="large" color={cores.branco}/>

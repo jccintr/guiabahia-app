@@ -1,35 +1,58 @@
-import React, { useState } from 'react'
-import { StyleSheet, SafeAreaView,View,Linking,Image} from 'react-native';
+import React, { useState,useEffect } from 'react'
+import { StyleSheet, StatusBar,View,Linking,Image} from 'react-native';
 import Header from '../components/Header';
 import MenuSobre from '../components/MenuSobre';
 import logo from '../assets/icon.png';
 import ModalAbout from '../components/ModalAbout';
 import { cores } from '../style/globalStyle';
+import { database } from '../firebaseConfig';
+import { collection,query,getDocs } from 'firebase/firestore';
 
 const About = () => {
 const [modalVisible,setModalVisible] = useState(false);
-const telefone = "73-99920-1898";
+const [telefone,setTelefone] = useState('');
+//const telefone = "73-99861-5963";
 
-      
+useEffect(()=>{
+  const getTelefone = async () => {
+    const collectionRef = collection(database,'Parametros');
+    const q = query(collectionRef);
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc) => {
+      setTelefone(doc.data().telefone);
+    });
+  }
+  getTelefone();
+
+}, []);
+
+
+
+
 const onAjudaPress = () =>{
   const mensagem = "Estou precisando de ajuda com o App Guia Bahia Extremo Sul.";
   Linking.openURL(`whatsapp://send?phone=55${telefone}&text=${mensagem}`);
 }
 
-  
+
 const onSugestoesPress = () =>{
-  const mensagem = "Tenho interesse em fazer parte do App Guia Bahia Extremo Sul.";
+  const mensagem = "Tenho sugestões ou reclamações a fazer sobre o App Guia Bahia Extremo Sul.";
   Linking.openURL(`whatsapp://send?phone=55${telefone}&text=${mensagem}`);
 }
 
-  
+
 const onNovosCadastrosPress = () =>{
-  const mensagem = "Tenho sugestões ou reclamações a fazer sobre o App Guia Bahia Extremo Sul.";
+  const mensagem = "Tenho interesse em fazer parte do App Guia Bahia Extremo Sul.";
   Linking.openURL(`whatsapp://send?phone=55${telefone}&text=${mensagem}`);
 }
 
   return (
     <View style={styles.container}>
+      <StatusBar
+            animated={true}
+            backgroundColor={cores.background}
+            barStyle="light-content"
+          />
         <Header title="Guia Bahia" subTitle="Extremo Sul"/>
         <Image style={styles.logo} source={logo}/>
         <MenuSobre iconName="help-circle" iconProvider="Feather" label="Central de Ajuda" onPress={onAjudaPress}/>
@@ -67,5 +90,5 @@ const styles = StyleSheet.create({
       marginTop: 10,
       marginBottom: 10,
   }
-  
-  }); 
+
+  });

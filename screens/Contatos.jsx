@@ -5,29 +5,43 @@ import Header from '../components/Header';
 import { cores } from '../style/globalStyle';
 import ContatoCard from '../components/ContatoCard';
 import { database } from '../firebaseConfig';
-import { collection,onSnapshot, orderBy, query,where } from 'firebase/firestore';
+import { collection,onSnapshot, orderBy, query,where,getDocs } from 'firebase/firestore';
 import { AntDesign } from '@expo/vector-icons';
-//import { StatusBar } from 'expo-status-bar';
+
 
 const Contatos = ({route}) => {
      const [contatos,setContatos] = useState([]);
      const {cidade,distrito,categoria} = route.params;
-     const mensagem = "Vi o seu contato no App Guia Bahia Extremo Sul !";
+     const [mensagem,setMensagem] = useState('');
+     //const mensagem = "Vi o seu contato no App Guia Bahia Extremo Sul !";
      const navigation = useNavigation();
 
 
-     useEffect(()=>{
+  useEffect(()=>{
       const collectionRef = collection(database,'Contatos');
       const q = query(collectionRef, where("cidadeId", "==", cidade.id),where("distritoId", "==", distrito.id),where("categoriaId", "==", categoria.id));
-     // const q = query(collectionRef, orderBy('nome','asc'));
- 
+
       const unsuscribe = onSnapshot(q,querySnapshot => {
         setContatos(querySnapshot.docs.map(doc => ( {id: doc.id, nome: doc.data().nome, telefone: doc.data().telefone} )))
       })
      // setIsLoading(false);
       return unsuscribe;
-  
   }, []);
+
+  useEffect(()=>{
+    const getMensagem = async () => {
+
+      const collectionRef = collection(database,'Parametros');
+      const q = query(collectionRef);
+      const querySnapshot = await getDocs(q);
+      querySnapshot.forEach((doc) => {
+        setMensagem(doc.data().mensagem);
+      });
+
+    }
+    getMensagem();
+
+}, []);
 
 onContatoPress = (telefone) => {
   Linking.openURL(`whatsapp://send?phone=55${telefone}&text=${mensagem}`);
@@ -45,12 +59,12 @@ onContatoPress = (telefone) => {
        <AntDesign name="arrowleft" size={24} color="#fff" />
     </TouchableOpacity>
    <View style={styles.body}>
-          {contatos.length>0?<Text style={{width:'100%',textAlign: 'left',marginBottom: 10,fontSize:16,color:cores.azul}}>Selecione uma opção:</Text>:''}
+          {contatos.length>0?<Text style={{width:'100%',textAlign: 'left',marginBottom: 10,fontSize:16,color:cores.verde}}>Selecione uma opção:</Text>:''}
           {contatos.length===0 ? <Text style={styles.noRecordText}>Nenhum registro encontrado.</Text>:''}
           <ScrollView style={{width:'100%'}} showsVerticalScrollIndicator={false}>
             {contatos.map(contato => <ContatoCard key={contato.id} contactName={contato.nome} onPress={()=>onContatoPress(contato.telefone)}/>)}
           </ScrollView>
-        
+
    </View>
 </View>
   )
@@ -67,13 +81,13 @@ const styles = StyleSheet.create({
       justifyContent: 'flex-start',
      },
     body:{
-      marginTop: 10,  
+      marginTop: 10,
       flex:1,
       width: '100%',
       paddingHorizontal: 20,
       alignItems:'center',
       justifyContent: 'flex-start',
-      
+
     },
     sectionTitle:{
       fontWeight:'bold',
@@ -101,7 +115,7 @@ const styles = StyleSheet.create({
       textAlign: 'center',
       color: cores.verde,
       fontWeight: 'bold',
-      
+
     },
-  
-  }); 
+
+  });

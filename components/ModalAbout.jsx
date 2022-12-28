@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { StyleSheet, Text,TouchableOpacity, Modal,View} from 'react-native';
+import { StyleSheet, Text,TouchableOpacity, Modal,View,ScrollView,StatusBar} from 'react-native';
 import { cores } from '../style/globalStyle';
 import { AntDesign } from '@expo/vector-icons';
 
@@ -8,6 +8,11 @@ const ModalAbout = ({modalVisible,setModalVisible}) => {
   return (
     <Modal visible={modalVisible} animationType="slide" transparent={true} onRequestClose={()=>setModalVisible(false)}>
         <View style={styles.container}>
+        <StatusBar
+            animated={true}
+            backgroundColor={cores.background}
+            barStyle="light-content"
+          />
             <View style={styles.header}>
                 <Text style={styles.titleText}>Sobre o Guia Bahia</Text>
                 <TouchableOpacity onPress={()=>setModalVisible(false)}>
@@ -15,12 +20,19 @@ const ModalAbout = ({modalVisible,setModalVisible}) => {
                 </TouchableOpacity>
             </View>
             <View style={styles.body}>
-                <Text style={styles.aboutText}>O APP GUIA BAHIA EXTREMO SUL é uma ferramenta que busca conectar os usuários aos serviços que necessitam. Esta ferramenta de interação social foi desenvolvida com base nas mais diversas
-localidades do extremo sul da Bahia.</Text>
-                <Text style={styles.aboutText}>A idéia do APP GUIA BAHIA EXTREMO SUL é se popularizar no meio social, manter de forma contínua e constante, a base de dados atualizada conforme as demandas forem aparecendo. A ferramenta conecta 
-os usuários diretamente ao aplicativo de comunicação conhecido como WhatsApp. Contamos com serviços intermitentes na busca de informações que porventura não estejam presentes em nossa plataforma, bem como colaboradores 
-que se fazem presentes para melhor atender ao usuário.</Text>
-<Text style={styles.aboutText}>Esperamos contribuir com a melhor interação social e ajuda mútua entre os envolvidos. Agradecemos a preferência. Tenho uma excelente experiência ! Att. Equipe Envolvida.</Text>
+                <ScrollView style={{width:'100%'}} showsVerticalScrollIndicator={false}>
+                    <Text style={styles.aboutText}>O APP GUIA BAHIA EXTREMO SUL é uma ferramenta que busca conectar os usuários aos serviços que necessitam.</Text>
+                    <Text style={styles.aboutText}>Esta ferramenta de interação social foi desenvolvida com base nas necessidades de informação e contatos relevantes sobre as mais diversas localidades do Extremo Sul da Bahia.</Text>
+                    <Text style={styles.aboutText}>A idéia do APP GUIA BAHIA EXTREMO SUL é se popularizar no meio social, mantendo se como um guia, de forma contínua e constante, com sua base de dados atualizada conforme as demandas forem surgindo.</Text>
+                    <Text style={styles.aboutText}>A ferramenta conecta os usuários as informações que buscam diretamente no aplicativo de comunicação conhecido como WhatsApp.</Text>
+                    <Text style={styles.aboutText}>Contamos com serviços intermitentes na busca de informações que porventura não estejam presentes em nossa plataforma, bem como colaboradores que se fazem presentes para melhor atender aos usuários do Guia Bahia Extremo Sul.</Text>
+                    <Text style={styles.aboutText}>Esperamos contribuir com a melhor interação social e ajuda mútua entre os envolvidos.</Text>
+                    <Text style={styles.aboutText}>Agradecemos a preferência.</Text>
+                    <Text style={styles.aboutText}>Desejamos que tenha uma excelente experiência!</Text>
+                    <Text style={styles.aboutText}>Atenciosamente, toda a Equipe Envolvida.</Text>
+                    <Text style={styles.aboutText}>ASFX PROJECTS CEO</Text>
+                </ScrollView>
+
             </View>
         </View>
     </Modal>
