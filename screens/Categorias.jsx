@@ -68,7 +68,7 @@ const sortCategory = (a,b) =>{
           </TouchableOpacity>
          <View style={styles.body}>
                <SearchField
-                    placeholder="Digite uma Categoria"
+                    placeholder="Digite uma Categoriaa"
                     value={searchText}
                     onChangeText={t=>setSearchText(t)}
                 />
