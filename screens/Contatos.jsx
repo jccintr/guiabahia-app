@@ -7,12 +7,14 @@ import ContatoCard from '../components/ContatoCard';
 import { database } from '../firebaseConfig';
 import { collection,onSnapshot, orderBy, query,where,getDocs } from 'firebase/firestore';
 import { AntDesign } from '@expo/vector-icons';
+import SearchField from '../components/SearchField';
 
 
 const Contatos = ({route}) => {
      const [contatos,setContatos] = useState([]);
      const {cidade,distrito,categoria} = route.params;
      const [mensagem,setMensagem] = useState('');
+     const [searchText,setSearchText] = useState('');
      //const mensagem = "Vi o seu contato no App Guia Bahia Extremo Sul !";
      const navigation = useNavigation();
 
@@ -59,10 +61,15 @@ onContatoPress = (telefone) => {
        <AntDesign name="arrowleft" size={24} color="#fff" />
     </TouchableOpacity>
    <View style={styles.body}>
-          {contatos.length>0?<Text style={{width:'100%',textAlign: 'left',marginBottom: 10,fontSize:16,color:cores.verde}}>Selecione uma opção:</Text>:''}
+           <SearchField
+                    placeholder="Pesquisar"
+                    value={searchText}
+                    onChangeText={t=>setSearchText(t)}
+                />
+          {/*contatos.length>0?<Text style={{width:'100%',textAlign: 'left',marginBottom: 10,fontSize:16,color:cores.verde}}>Selecione uma opção:</Text>:''*/}
           {contatos.length===0 ? <Text style={styles.noRecordText}>Nenhum registro encontrado.</Text>:''}
           <ScrollView style={{width:'100%'}} showsVerticalScrollIndicator={false}>
-            {contatos.map(contato => <ContatoCard key={contato.id} contactName={contato.nome} onPress={()=>onContatoPress(contato.telefone)}/>)}
+            {contatos.filter((contato)=>contato.nome.toUpperCase().includes(searchText.toUpperCase())).sort((a,b)=>{return a.nome > b.nome}).map(contato => <ContatoCard key={contato.id} contactName={contato.nome} onPress={()=>onContatoPress(contato.telefone)}/>)}
           </ScrollView>
 
    </View>

@@ -6,12 +6,14 @@ import { cores } from '../style/globalStyle';
 import CityCard from '../components/CityCard';
 import { database } from '../firebaseConfig';
 import { collection,onSnapshot, orderBy, query,getDocs} from 'firebase/firestore';
+import SearchField from '../components/SearchField';
 //import { StatusBar } from 'expo-status-bar';
 
 const Home = () => {
     const navigation = useNavigation();
     const [cidades,setCidades] = useState([]);
     const [aviso,setAviso] = useState('');
+    const [searchText,setSearchText] = useState('');
 
 
     useEffect(()=>{
@@ -60,9 +62,14 @@ const onCityPress = (cidade) => {
          <Text style={styles.sloganText}>A sua busca completa em um único lugar !</Text>
          <Text style={styles.avisoText}>{aviso}</Text>
          <View style={styles.body}>
-                <Text style={{width:'100%',textAlign: 'left',marginBottom: 10,fontSize:14,color:cores.verde}}>Escolha uma cidade:</Text>
+                <SearchField
+                    placeholder="Digite a Cidade"
+                    value={searchText}
+                    onChangeText={t=>setSearchText(t)}
+                />
+                {/*<Text style={{width:'100%',textAlign: 'left',marginBottom: 10,fontSize:14,color:cores.verde}}>Escolha uma cidade:</Text>*/}
                 <ScrollView style={{width:'100%'}} showsVerticalScrollIndicator={false}>
-                {cidades.map(cidade => <CityCard key={cidade.id} cidade={cidade } onPress={()=>onCityPress(cidade)}/>)}
+                {cidades.filter((cidade)=>cidade.nome.toUpperCase().includes(searchText.toUpperCase())).map(cidade => <CityCard key={cidade.id} cidade={cidade } onPress={()=>onCityPress(cidade)}/>)}
                 </ScrollView>
 
 

@@ -31,11 +31,11 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: cores.marcador, 
         flexDirection: 'row',
-       alignItems: 'center',
+        alignItems: 'center',
        justifyContent: 'space-between',
      },
       cityNameText:{
-     
+      width: '90%',
       fontSize: 18,
       color: cores.branco,
     },

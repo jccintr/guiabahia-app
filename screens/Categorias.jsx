@@ -7,20 +7,25 @@ import CategoryCard from '../components/CategoryCard';
 import { database } from '../firebaseConfig';
 import { collection,onSnapshot, orderBy, query} from 'firebase/firestore';
 import { AntDesign } from '@expo/vector-icons';
+import SearchField from '../components/SearchField';
 //import { StatusBar } from 'expo-status-bar';
 
 const Categorias = ({route}) => {
    const navigation = useNavigation();
    const {cidade,distrito} = route.params;
    const [categorias,setCategorias] = useState([]);
+   const [searchText,setSearchText] = useState('');
 
    useEffect(()=>{
     const collectionRef = collection(database,'Categorias');
-    const q = query(collectionRef,orderBy('ordem','asc'));
+   const q = query(collectionRef,orderBy('ordem','asc'));
+  
+
     const unsuscribe = onSnapshot(q,querySnapshot => {
-       setCategorias(querySnapshot.docs.map(doc => ( {id: doc.id, nome: doc.data().nome} )))
+       setCategorias(querySnapshot.docs.map(doc => ( {id: doc.id, nome: doc.data().nome, ordem: doc.data().ordem} )))
     })
-  //  setIsLoading(false);
+ 
+  
     return unsuscribe;
 
 }, []);    
@@ -30,6 +35,25 @@ const Categorias = ({route}) => {
   const onCategoryPress = (categoria) => {
    navigation.navigate('Contatos',{cidade: cidade,distrito:distrito,categoria:categoria});
 }
+
+/*
+const sortCategory = (a,b) =>{
+
+ 
+  if (a.ordem < b.ordem) return -1 ;
+	if (a.ordem > b.ordem) return  1;
+
+	
+  if (a.ordem == b.ordem){
+      if (a.nome < b.nome) return -1;
+      if (a.nome > b.nome) return 1;
+  }
+
+}
+
+*/
+
+
 
   return (
      <View style={styles.container}>
@@ -43,9 +67,14 @@ const Categorias = ({route}) => {
               <AntDesign name="arrowleft" size={24} color="#fff" />
           </TouchableOpacity>
          <View style={styles.body}>
-                <Text style={{width:'100%',textAlign: 'left',marginBottom: 10,fontSize:16,color:cores.verde}}>Escolha uma categoria:</Text>
+               <SearchField
+                    placeholder="Digite uma Categoria"
+                    value={searchText}
+                    onChangeText={t=>setSearchText(t)}
+                />
+                {/*<Text style={{width:'100%',textAlign: 'left',marginBottom: 10,fontSize:16,color:cores.verde}}>Escolha uma categoria:</Text>*/}
                 <ScrollView style={{width:'100%'}} showsVerticalScrollIndicator={false}>
-                  {categorias.map(categoria => <CategoryCard key={categoria.id} categoryName={categoria.nome} onPress={()=>onCategoryPress(categoria)}/>)}
+                  {categorias.filter((categoria)=>categoria.nome.toUpperCase().includes(searchText.toUpperCase())).sort((a,b)=> (a.ordem - b.ordem || a.nome.localeCompare(b.nome))).map(categoria => <CategoryCard key={categoria.id} categoryName={categoria.nome} onPress={()=>onCategoryPress(categoria)}/>)}
                 </ScrollView>
                
          </View>
