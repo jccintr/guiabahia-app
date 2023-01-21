@@ -110,7 +110,7 @@ const styles = StyleSheet.create({
       position: 'absolute',
       width: 50,
       height: 50,
-      top: 50,
+      top: 25,
       left: 15,
     },
     noRecordText:{

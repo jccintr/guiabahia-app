@@ -10,8 +10,8 @@ const ContatoCard = ({contactName,onPress}) => {
   return (
     <TouchableOpacity onPress={onPress} style={styles.container}>
        
-       <Text style={styles.cityNameText}>{contactName}</Text>
-       <FontAwesome5 name="whatsapp" size={30} color={cores.branco} />
+       <Text style={styles.contactNameText}>{contactName}</Text>
+       <FontAwesome5 name="whatsapp" size={24} color={cores.branco} />
     </TouchableOpacity>
   )
 }
@@ -34,8 +34,7 @@ const styles = StyleSheet.create({
        alignItems: 'center',
        justifyContent: 'space-between',
      },
-      cityNameText:{
-     
+     contactNameText:{
       fontSize: 18,
       color: cores.branco,
     },
