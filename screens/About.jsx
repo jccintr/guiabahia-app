@@ -46,6 +46,10 @@ const onNovosCadastrosPress = () =>{
   Linking.openURL(`whatsapp://send?phone=55${telefone}&text=${mensagem}`);
 }
 
+const onInstagramPress = () => {
+  Linking.openURL('https://instagram.com/guiabahiaextremosul?igshid=YmMyMTA2M2Y=');
+}
+
   return (
     <View style={styles.container}>
       <StatusBar
@@ -59,6 +63,7 @@ const onNovosCadastrosPress = () =>{
         <MenuSobre iconName="ios-megaphone-outline" iconProvider="Ionicons" label="Sugestões ou reclamações" onPress={onSugestoesPress}/>
         <MenuSobre iconName="person-add" iconProvider="Octicons" label="Novos Cadastros" onPress={onNovosCadastrosPress}/>
         <MenuSobre iconName="infocirlceo" iconProvider="AntDesign" label="Sobre o Guia Bahia" onPress={()=>setModalVisible(true)}/>
+        <MenuSobre iconName="instagram" iconProvider="Entypo" label="Visite nosso Instagram" onPress={onInstagramPress}/>
         <ModalAbout modalVisible={modalVisible} setModalVisible={setModalVisible} />
     </View>
   )
