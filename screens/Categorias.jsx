@@ -5,7 +5,7 @@ import Header from '../components/Header';
 import { cores } from '../style/globalStyle';
 import CategoryCard from '../components/CategoryCard';
 import { database } from '../firebaseConfig';
-import { collection,onSnapshot, orderBy, query} from 'firebase/firestore';
+import { collection,onSnapshot, orderBy, query } from 'firebase/firestore';
 import { AntDesign } from '@expo/vector-icons';
 import SearchField from '../components/SearchField';
 //import { StatusBar } from 'expo-status-bar';
@@ -22,7 +22,12 @@ const Categorias = ({route}) => {
   
 
     const unsuscribe = onSnapshot(q,querySnapshot => {
-       setCategorias(querySnapshot.docs.map(doc => ( {id: doc.id, nome: doc.data().nome, ordem: doc.data().ordem} )))
+       
+       setCategorias(querySnapshot.docs.map(doc => ( {
+        id: doc.id,
+        nome: doc.data().nome,
+        ordem: doc.data().ordem}
+         )))
     })
  
   

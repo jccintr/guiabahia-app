@@ -11,14 +11,14 @@ import { getFirestore } from 'firebase/firestore';
 // Initialize Firebase
 const firebaseConfig = {
     
-    /*
-    apiKey: "AIzaSyDaOsYLS8gZ9SXt-KLljauNgj4lZOhkasc",
-    authDomain: "guiabahia-db337.firebaseapp.com",
-    projectId: "guiabahia-db337",
-    storageBucket: "guiabahia-db337.appspot.com",
-    messagingSenderId: "406789909537",
-    appId: "1:406789909537:web:6ea76be0ab071e15df4760"
-*/
+    
+    // apiKey: "AIzaSyDaOsYLS8gZ9SXt-KLljauNgj4lZOhkasc",
+    // authDomain: "guiabahia-db337.firebaseapp.com",
+    // projectId: "guiabahia-db337",
+    // storageBucket: "guiabahia-db337.appspot.com",
+    // messagingSenderId: "406789909537",
+    // appId: "1:406789909537:web:6ea76be0ab071e15df4760"
+
     
   
     //anderson config

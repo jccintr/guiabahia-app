@@ -1,17 +1,13 @@
-import { StyleSheet, SafeAreaView,View,Text,ScrollView, TouchableOpacity} from 'react-native';
+import { StyleSheet,Text,TouchableOpacity} from 'react-native';
 import { cores } from '../style/globalStyle';
-import { FontAwesome5 } from '@expo/vector-icons';
 
 
-
-const ContatoCard = ({contactName,onPress}) => {
-    
+const ContatoCard = ({contato,onPress}) => {
+   
 
   return (
     <TouchableOpacity onPress={onPress} style={styles.container}>
-       
-       <Text style={styles.contactNameText}>{contactName}</Text>
-       <FontAwesome5 name="whatsapp" size={24} color={cores.branco} />
+       <Text style={styles.contactNameText}>{contato.nome}</Text>
     </TouchableOpacity>
   )
 }
@@ -20,7 +16,6 @@ export default ContatoCard
 
 const styles = StyleSheet.create({
     container: {
-       
         width: '100%',
         height: 50,
         marginBottom: 10,
@@ -31,8 +26,8 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: cores.marcador, 
         flexDirection: 'row',
-       alignItems: 'center',
-       justifyContent: 'space-between',
+        alignItems: 'center',
+        justifyContent: 'space-between',
      },
      contactNameText:{
       fontSize: 18,
