@@ -27,7 +27,7 @@ const Contatos = ({route}) => {
       const q = query(collectionRef, where("cidadeId", "==", cidade.id),where("distritoId", "==", distrito.id),where("categoriaId", "==", categoria.id));
 
       const unsuscribe = onSnapshot(q,querySnapshot => {
-        setContatos(querySnapshot.docs.map(doc => ( {id: doc.id, nome: doc.data().nome, telefone: doc.data().telefone, instagram: doc.data().instagram ?doc.data().instagram:'',facebook: doc.data().facebook ?doc.data().facebook:''} )))
+        setContatos(querySnapshot.docs.map(doc => ( {id: doc.id, nome: doc.data().nome, telefone: doc.data().telefone, instagram: doc.data().instagram ?doc.data().instagram:'',facebook: doc.data().facebook ?doc.data().facebook:'',website: doc.data().website ?doc.data().website:''} )))
       })
      // setIsLoading(false);
       return unsuscribe;
@@ -71,6 +71,12 @@ const onWhatsAppPress = (telefone) => {
   setModalVisible(false);
 }
 
+const onWebSitePress = (website) => {
+  Linking.openURL(`https://${website}`);
+  setModalVisible(false);
+}
+
+
   return (
     <View style={styles.container}>
        <StatusBar animated={true} backgroundColor={cores.background} barStyle="light-content"/>
@@ -86,7 +92,7 @@ const onWhatsAppPress = (telefone) => {
                {contatos.filter((contato)=>contato.nome.toUpperCase().includes(searchText.toUpperCase())).sort((a,b)=>{return a.nome > b.nome}).map(contato => <ContatoCard key={contato.id} contato={contato} onPress={()=>onContatoPress(contato)}/>)}
            </ScrollView>
        </View>
-       {contatoSelecionado&&<ModalContato modalVisible={modalVisible} setModalVisible={setModalVisible} contato={contatoSelecionado} onFacebookPress={onFacebookPress} onInstagramPress={onInstagramPress} onWhatsAppPress={onWhatsAppPress}/>}
+       {contatoSelecionado&&<ModalContato modalVisible={modalVisible} setModalVisible={setModalVisible} contato={contatoSelecionado} onFacebookPress={onFacebookPress} onInstagramPress={onInstagramPress} onWhatsAppPress={onWhatsAppPress} onWebSitePress={onWebSitePress}/>}
     </View>
   )
 }

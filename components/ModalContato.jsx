@@ -1,11 +1,11 @@
 import React from 'react';
 import { StyleSheet, Text, View,Modal,TouchableOpacity} from 'react-native';
-import { EvilIcons,FontAwesome5 } from '@expo/vector-icons';
+import { EvilIcons,FontAwesome5,Feather } from '@expo/vector-icons';
 import { cores } from '../style/globalStyle';
 
 
 
-const ModalContato = ({modalVisible,setModalVisible,contato,onWhatsAppPress,onInstagramPress,onFacebookPress}) => {
+const ModalContato = ({modalVisible,setModalVisible,contato,onWhatsAppPress,onInstagramPress,onFacebookPress,onWebSitePress}) => {
 
 
 
@@ -34,6 +34,11 @@ const ModalContato = ({modalVisible,setModalVisible,contato,onWhatsAppPress,onIn
                           {contato.facebook.length>0&&<TouchableOpacity style={styles.socialButton} onPress={()=>onFacebookPress(contato.facebook)}>
                               <FontAwesome5 name="facebook" size={30} color={cores.verde} />
                               <Text style={styles.socialName}>Facebook</Text>
+                          </TouchableOpacity>}
+
+                          {contato.website.length>0&&<TouchableOpacity style={styles.socialButton} onPress={()=>onWebSitePress(contato.website)}>
+                              <Feather name="chrome" size={30} color={cores.verde} />
+                              <Text style={styles.socialName}>WebSite</Text>
                           </TouchableOpacity>}
                           
                       </View>
